@@ -1,0 +1,6 @@
+.index/
+corpora/
+__pycache__/
+*.egg-info/
+.venv/
+.pytest_cache/
