@@ -1,0 +1,279 @@
+# Retrieval benchmark on scikit-learn 1.5.2 (sklearn/ package, tests excluded).
+# Each question lists one or more acceptable answers as "path::Symbol". A retrieved
+# chunk is relevant if it comes from that file and overlaps the symbol's line range.
+#
+# category:
+#   semantic - natural-language question, no code identifier (what a newcomer would type)
+#   keyword  - mentions an identifier from the code base
+repo: https://github.com/scikit-learn/scikit-learn
+ref: "1.5.2"
+questions:
+  - id: s01
+    category: semantic
+    question: How is the initial set of cluster centers chosen so that the centers are spread out?
+    expected: [sklearn/cluster/_kmeans.py::_kmeans_plusplus, sklearn/cluster/_kmeans.py::kmeans_plusplus]
+  - id: s02
+    category: semantic
+    question: Where is the k-means convergence tolerance scaled by the variance of the data?
+    expected: [sklearn/cluster/_kmeans.py::_tolerance]
+  - id: s03
+    category: semantic
+    question: How does a random forest compute its out-of-bag score?
+    expected: [sklearn/ensemble/_forest.py::BaseForest._compute_oob_predictions, sklearn/ensemble/_forest.py::ForestClassifier._set_oob_score_and_attributes, sklearn/ensemble/_forest.py::ForestRegressor._set_oob_score_and_attributes]
+  - id: s04
+    category: semantic
+    question: Where are the bootstrap samples drawn with replacement for each tree of a forest?
+    expected: [sklearn/ensemble/_forest.py::_generate_sample_indices]
+  - id: s05
+    category: semantic
+    question: How are cross-validation folds built so that each fold keeps the class proportions?
+    expected: [sklearn/model_selection/_split.py::StratifiedKFold._make_test_folds]
+  - id: s06
+    category: semantic
+    question: How is the area under the receiver operating characteristic curve computed for a binary problem?
+    expected: [sklearn/metrics/_ranking.py::_binary_roc_auc_score, sklearn/metrics/_ranking.py::roc_auc_score]
+  - id: s07
+    category: semantic
+    question: How do I verify that an estimator has been fitted before calling predict on it?
+    expected: [sklearn/utils/validation.py::check_is_fitted]
+  - id: s08
+    category: semantic
+    question: Where are input arrays validated and converted, rejecting NaN or infinite values?
+    expected: [sklearn/utils/validation.py::check_array, sklearn/utils/validation.py::_assert_all_finite]
+  - id: s09
+    category: semantic
+    question: How does a chain of transformers pass the output of one step to the next one during fit?
+    expected: [sklearn/pipeline.py::Pipeline._fit, sklearn/pipeline.py::Pipeline.fit]
+  - id: s10
+    category: semantic
+    question: How are all the combinations of a hyper-parameter grid enumerated?
+    expected: [sklearn/model_selection/_search.py::ParameterGrid.__iter__, sklearn/model_selection/_search.py::ParameterGrid]
+  - id: s11
+    category: semantic
+    question: Where is the learning rate shrinkage applied when a new tree is added in gradient boosting?
+    expected: [sklearn/ensemble/_gb.py::BaseGradientBoosting._fit_stage, sklearn/ensemble/_gb.py::_update_terminal_regions]
+  - id: s12
+    category: semantic
+    question: How does early stopping decide to stop adding trees in histogram-based gradient boosting?
+    expected: [sklearn/ensemble/_hist_gradient_boosting/gradient_boosting.py::BaseHistGradientBoosting._should_stop, sklearn/ensemble/_hist_gradient_boosting/gradient_boosting.py::BaseHistGradientBoosting._check_early_stopping_loss, sklearn/ensemble/_hist_gradient_boosting/gradient_boosting.py::BaseHistGradientBoosting._check_early_stopping_scorer]
+  - id: s13
+    category: semantic
+    question: How are continuous features discretized into integer bins before training boosted trees?
+    expected: [sklearn/ensemble/_hist_gradient_boosting/binning.py::_BinMapper.fit, sklearn/ensemble/_hist_gradient_boosting/binning.py::_find_binning_thresholds]
+  - id: s14
+    category: semantic
+    question: How is the number of principal components chosen when the user asks for a fraction of explained variance?
+    expected: [sklearn/decomposition/_pca.py::PCA._fit_full]
+  - id: s15
+    category: semantic
+    question: How is the SVD solver picked automatically from the shape of the data in principal component analysis?
+    expected: [sklearn/decomposition/_pca.py::PCA._fit]
+  - id: s16
+    category: semantic
+    question: How are missing values replaced by the column mean or the most frequent value?
+    expected: [sklearn/impute/_base.py::SimpleImputer]
+  - id: s17
+    category: semantic
+    question: What happens to categories that were never seen during training when encoding categorical features as one-hot vectors?
+    expected: [sklearn/preprocessing/_encoders.py::OneHotEncoder, sklearn/preprocessing/_encoders.py::_BaseEncoder._transform]
+  - id: s18
+    category: semantic
+    question: How is data standardized to zero mean and unit variance incrementally, one batch at a time?
+    expected: [sklearn/preprocessing/_data.py::StandardScaler.partial_fit]
+  - id: s19
+    category: semantic
+    question: How is the grid of regularization strengths generated for the lasso path?
+    expected: [sklearn/linear_model/_coordinate_descent.py::_alpha_grid]
+  - id: s20
+    category: semantic
+    question: How does logistic regression choose between one-vs-rest and a multinomial formulation?
+    expected: [sklearn/linear_model/_logistic.py::_check_multi_class, sklearn/linear_model/_logistic.py::LogisticRegression.fit]
+  - id: s21
+    category: semantic
+    question: Where is the silhouette coefficient of each individual sample computed?
+    expected: [sklearn/metrics/cluster/_unsupervised.py::silhouette_samples]
+  - id: s22
+    category: semantic
+    question: How does the nearest neighbors search pick between a ball tree, a kd-tree and brute force?
+    expected: [sklearn/neighbors/_base.py::NeighborsBase._fit]
+  - id: s23
+    category: semantic
+    question: How are neighbor labels combined, optionally weighted by distance, to predict a class?
+    expected: [sklearn/neighbors/_classification.py::KNeighborsClassifier.predict, sklearn/neighbors/_classification.py::KNeighborsClassifier.predict_proba, sklearn/neighbors/_base.py::_get_weights]
+  - id: s24
+    category: semantic
+    question: How is a model copied with the same parameters but without its fitted state?
+    expected: [sklearn/base.py::clone, sklearn/base.py::_clone_parametrized]
+  - id: s25
+    category: semantic
+    question: How does an estimator expose its constructor arguments as parameters that can be read and set?
+    expected: [sklearn/base.py::BaseEstimator.get_params, sklearn/base.py::BaseEstimator._get_param_names, sklearn/base.py::BaseEstimator.set_params]
+  - id: s26
+    category: semantic
+    question: How are precision, recall and F-score averaged over classes (macro, micro, weighted)?
+    expected: [sklearn/metrics/_classification.py::precision_recall_fscore_support]
+  - id: s27
+    category: semantic
+    question: How are the joint probabilities computed from pairwise distances with a perplexity target in the embedding for visualization?
+    expected: [sklearn/manifold/_t_sne.py::_joint_probabilities, sklearn/manifold/_t_sne.py::_joint_probabilities_nn]
+  - id: s28
+    category: semantic
+    question: How are anomaly scores derived from the average path length in random isolation trees?
+    expected: [sklearn/ensemble/_iforest.py::IsolationForest._compute_score_samples, sklearn/ensemble/_iforest.py::_average_path_length, sklearn/ensemble/_iforest.py::IsolationForest.score_samples, sklearn/ensemble/_iforest.py::IsolationForest._compute_chunked_score_samples]
+  - id: s29
+    category: semantic
+    question: How is a dataset randomly split into a training part and a test part?
+    expected: [sklearn/model_selection/_split.py::train_test_split]
+  - id: s30
+    category: semantic
+    question: How is a model fitted and scored on one train/test split during cross-validation?
+    expected: [sklearn/model_selection/_validation.py::_fit_and_score]
+  - id: s31
+    category: semantic
+    question: How are different transformations applied to different subsets of the input columns?
+    expected: [sklearn/compose/_column_transformer.py::ColumnTransformer.fit_transform, sklearn/compose/_column_transformer.py::ColumnTransformer._call_func_on_transformers, sklearn/compose/_column_transformer.py::ColumnTransformer._iter, sklearn/compose/_column_transformer.py::ColumnTransformer]
+  - id: s32
+    category: semantic
+    question: How are classifier probabilities calibrated with a sigmoid or with isotonic regression?
+    expected: [sklearn/calibration.py::_fit_calibrator, sklearn/calibration.py::_SigmoidCalibration, sklearn/calibration.py::_sigmoid_calibration, sklearn/calibration.py::CalibratedClassifierCV]
+  - id: s33
+    category: semantic
+    question: How is the mutual information between a continuous feature and a discrete target estimated?
+    expected: [sklearn/feature_selection/_mutual_info.py::_compute_mi_cd, sklearn/feature_selection/_mutual_info.py::_estimate_mi, sklearn/feature_selection/_mutual_info.py::mutual_info_classif]
+  - id: s34
+    category: semantic
+    question: How are the least important features removed one step at a time until the desired number remains?
+    expected: [sklearn/feature_selection/_rfe.py::RFE._fit]
+  - id: s35
+    category: semantic
+    question: How is a seed or None turned into a random number generator instance?
+    expected: [sklearn/utils/validation.py::check_random_state]
+  - id: s36
+    category: semantic
+    question: How does density-based clustering identify core samples and expand clusters from them?
+    expected: [sklearn/cluster/_dbscan.py::DBSCAN.fit, sklearn/cluster/_dbscan.py::dbscan]
+  - id: s37
+    category: semantic
+    question: How are text documents turned into vectors of token counts with a vocabulary?
+    expected: [sklearn/feature_extraction/text.py::CountVectorizer._count_vocab, sklearn/feature_extraction/text.py::CountVectorizer.fit_transform]
+  - id: s38
+    category: semantic
+    question: How is inverse document frequency weighting applied to raw term counts?
+    expected: [sklearn/feature_extraction/text.py::TfidfTransformer.fit, sklearn/feature_extraction/text.py::TfidfTransformer.transform]
+  - id: s39
+    category: semantic
+    question: How does the mixture of Gaussians alternate expectation and maximization steps until convergence?
+    expected: [sklearn/mixture/_base.py::BaseMixture.fit_predict, sklearn/mixture/_base.py::BaseMixture._e_step, sklearn/mixture/_gaussian_mixture.py::GaussianMixture._m_step]
+  - id: s40
+    category: semantic
+    question: How is the interactive HTML representation of an estimator rendered in a notebook?
+    expected: [sklearn/utils/_estimator_html_repr.py::estimator_html_repr]
+  - id: s41
+    category: semantic
+    question: How is the global configuration temporarily changed inside a with block?
+    expected: [sklearn/_config.py::config_context]
+  - id: s42
+    category: semantic
+    question: Where is the confusion matrix between true and predicted labels computed?
+    expected: [sklearn/metrics/_classification.py::confusion_matrix]
+
+  - id: k01
+    category: keyword
+    question: What does check_X_y do?
+    expected: [sklearn/utils/validation.py::check_X_y]
+  - id: k02
+    category: keyword
+    question: Where is _fit_and_score defined and what does it return?
+    expected: [sklearn/model_selection/_validation.py::_fit_and_score]
+  - id: k03
+    category: keyword
+    question: How does GridSearchCV._run_search work?
+    expected: [sklearn/model_selection/_search.py::GridSearchCV._run_search]
+  - id: k04
+    category: keyword
+    question: Which loss does HistGradientBoostingClassifier use for multiclass problems?
+    expected: [sklearn/ensemble/_hist_gradient_boosting/gradient_boosting.py::HistGradientBoostingClassifier._get_loss]
+  - id: k05
+    category: keyword
+    question: What does _safe_indexing do?
+    expected: [sklearn/utils/_indexing.py::_safe_indexing]
+  - id: k06
+    category: keyword
+    question: How is n_init="auto" resolved in KMeans?
+    expected: [sklearn/cluster/_kmeans.py::_BaseKMeans._check_params_vs_input, sklearn/cluster/_kmeans.py::KMeans._check_params_vs_input]
+  - id: k07
+    category: keyword
+    question: What does type_of_target return for multilabel input?
+    expected: [sklearn/utils/multiclass.py::type_of_target]
+  - id: k08
+    category: keyword
+    question: How does StratifiedShuffleSplit generate its splits?
+    expected: [sklearn/model_selection/_split.py::StratifiedShuffleSplit._iter_indices]
+  - id: k09
+    category: keyword
+    question: How does make_pipeline name the steps compared to Pipeline?
+    expected: [sklearn/pipeline.py::make_pipeline, sklearn/pipeline.py::_name_estimators]
+  - id: k10
+    category: keyword
+    question: How is sample_weight validated in _check_sample_weight?
+    expected: [sklearn/utils/validation.py::_check_sample_weight]
+  - id: k11
+    category: keyword
+    question: Where is RandomForestClassifier predict_proba implemented?
+    expected: [sklearn/ensemble/_forest.py::ForestClassifier.predict_proba]
+  - id: k12
+    category: keyword
+    question: How does MinMaxScaler.transform work?
+    expected: [sklearn/preprocessing/_data.py::MinMaxScaler.transform]
+  - id: k13
+    category: keyword
+    question: Where is LabelEncoder.fit defined?
+    expected: [sklearn/preprocessing/_label.py::LabelEncoder.fit]
+  - id: k14
+    category: keyword
+    question: Which solver does Ridge use when solver="auto"?
+    expected: [sklearn/linear_model/_ridge.py::_ridge_regression, sklearn/linear_model/_ridge.py::_BaseRidge.fit, sklearn/linear_model/_ridge.py::resolve_solver]
+  - id: k15
+    category: keyword
+    question: How does TruncatedSVD.fit_transform call randomized_svd?
+    expected: [sklearn/decomposition/_truncated_svd.py::TruncatedSVD.fit_transform]
+  - id: k16
+    category: keyword
+    question: How does euclidean_distances compute distances efficiently?
+    expected: [sklearn/metrics/pairwise.py::euclidean_distances, sklearn/metrics/pairwise.py::_euclidean_distances]
+  - id: k17
+    category: keyword
+    question: What does mean_squared_error do with the multioutput argument?
+    expected: [sklearn/metrics/_regression.py::mean_squared_error]
+  - id: k18
+    category: keyword
+    question: Where is soft voting implemented in VotingClassifier?
+    expected: [sklearn/ensemble/_voting.py::VotingClassifier.predict_proba, sklearn/ensemble/_voting.py::VotingClassifier._collect_probas, sklearn/ensemble/_voting.py::VotingClassifier.predict]
+  - id: k19
+    category: keyword
+    question: How does permutation_importance shuffle the columns?
+    expected: [sklearn/inspection/_permutation_importance.py::_calculate_permutation_scores]
+  - id: k20
+    category: keyword
+    question: How does SVC compute gamma when gamma="scale"?
+    expected: [sklearn/svm/_base.py::BaseLibSVM.fit]
+  - id: k21
+    category: keyword
+    question: What does learning_curve return?
+    expected: [sklearn/model_selection/_validation.py::learning_curve]
+  - id: k22
+    category: keyword
+    question: How is the text output of classification_report formatted?
+    expected: [sklearn/metrics/_classification.py::classification_report]
+  - id: k23
+    category: keyword
+    question: How does AgglomerativeClustering build the tree with ward linkage?
+    expected: [sklearn/cluster/_agglomerative.py::AgglomerativeClustering._fit, sklearn/cluster/_agglomerative.py::ward_tree]
+  - id: k24
+    category: keyword
+    question: Where does fetch_openml cache downloaded files?
+    expected: [sklearn/datasets/_openml.py::fetch_openml, sklearn/datasets/_openml.py::_open_openml_url, sklearn/datasets/_openml.py::_retry_with_clean_cache, sklearn/datasets/_openml.py::_get_local_path]
+  - id: k25
+    category: keyword
+    question: How does PolynomialFeatures compute get_feature_names_out?
+    expected: [sklearn/preprocessing/_polynomial.py::PolynomialFeatures.get_feature_names_out]
